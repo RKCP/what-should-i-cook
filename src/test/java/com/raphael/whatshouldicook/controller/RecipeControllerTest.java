@@ -15,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeControllerTest {
@@ -29,7 +28,7 @@ public class RecipeControllerTest {
 
 
     @Test
-    void getRecipeFromImage_ReturnsRecipeBasedOnImage() {
+    void handleFileUpload_ReturnStringAfterImageUploaded() {
 
 
         // Given
@@ -45,7 +44,7 @@ public class RecipeControllerTest {
         //when(recipeServiceMock.uploadImage(multipartFile)).thenReturn("Success!");
 
         // When
-        String imageUpload = recipeController.getRecipieFromImage(multipartFile);
+        String imageUpload = recipeController.handleFileUpload(multipartFile);
 
         // Then
         assertEquals("Success!", imageUpload);
