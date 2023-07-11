@@ -1,5 +1,6 @@
 package com.raphael.whatshouldicook.controller;
 
+import com.raphael.whatshouldicook.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,7 +24,7 @@ public class RecipeControllerTest {
     private RecipeService recipeServiceMock;
 
     @InjectMocks
-    private RecipieController recipieController;
+    private RecipeController recipeController;
 
 
 
@@ -32,18 +33,19 @@ public class RecipeControllerTest {
 
 
         // Given
-        String filePath = "/path/to/local/image.jpg"; // Replace with the path to the local image file
+        String filePath = "src/test/resources/fridge.jpg"; // Replace with the path to the local image file
+        MultipartFile multipartFile;
         try {
-            MultipartFile multipartFile = createMultipartFileFromLocalFile(filePath);
+            multipartFile = createMultipartFileFromLocalFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
             //logger
         }
 
-        when(recipeServiceMock.uploadImage(file)).thenReturn("Success!");
+        //when(recipeServiceMock.uploadImage(multipartFile)).thenReturn("Success!");
 
         // When
-        String imageUpload = recipieController.getRecipieFromImage(file);
+        String imageUpload = recipeController.getRecipieFromImage(multipartFile);
 
         // Then
         assertEquals("Success!", imageUpload);
