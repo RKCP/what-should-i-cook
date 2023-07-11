@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Image</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<div class="drop-area" id="dropArea" th:attr="data-url=@{/upload}" th:on-drop="handleDrop(event)">
+    <div class="message">
+        <strong>Drag and drop</strong> an image here or <strong>click to browse</strong>.
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

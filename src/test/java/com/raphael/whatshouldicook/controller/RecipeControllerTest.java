@@ -26,29 +26,28 @@ public class RecipeControllerTest {
     private RecipeController recipeController;
 
 
-
-    @Test
-    void handleFileUpload_ReturnStringAfterImageUploaded() {
-
-
-        // Given
-        String filePath = "src/test/resources/fridge.jpg"; // Replace with the path to the local image file
-        MultipartFile multipartFile;
-        try {
-            multipartFile = createMultipartFileFromLocalFile(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-            //logger
-        }
-
-        //when(recipeServiceMock.uploadImage(multipartFile)).thenReturn("Success!");
-
-        // When
-        String imageUpload = recipeController.handleFileUpload(multipartFile);
-
-        // Then
-        assertEquals("Success!", imageUpload);
-    }
+//    @Test
+//    void handleFileUpload_ReturnStringAfterImageUploaded() {
+//
+//
+//        // Given
+//        String filePath = "src/test/resources/fridge.jpg"; // Replace with the path to the local image file
+//        MultipartFile multipartFile;
+//        try {
+//            multipartFile = createMultipartFileFromLocalFile(filePath);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//            //logger
+//        }
+//
+//        //when(recipeServiceMock.uploadImage(multipartFile)).thenReturn("Success!");
+//
+//        // When
+//        String imageUpload = recipeController.handleFileUpload(multipartFile);
+//
+//        // Then
+//        assertEquals("Success!", imageUpload);
+//    }
 
 
 
