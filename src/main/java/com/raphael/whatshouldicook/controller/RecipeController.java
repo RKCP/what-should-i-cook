@@ -21,6 +21,7 @@ public class RecipeController {
 
         // Process the uploaded file
         // ...
+        System.out.println("hitting upload method");
         return "index"; // Redirect back to the index page
     }
 }

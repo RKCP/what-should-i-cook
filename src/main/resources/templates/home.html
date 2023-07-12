@@ -11,6 +11,30 @@
     </div>
 </div>
 
-<script src="/js/script.js"></script>
+<script>
+    var dropArea = document.getElementById('dropArea');
+
+    // Prevent default behavior when files are dragged and dropped onto the drop area
+    dropArea.addEventListener('dragenter', preventDefault, false);
+    dropArea.addEventListener('dragleave', preventDefault, false);
+    dropArea.addEventListener('dragover', preventDefault, false);
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefault(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function handleDrop(e) {
+        preventDefault(e);
+
+        var files = e.dataTransfer.files;
+
+        // Process the dropped files or perform further actions
+        // ...
+
+        console.log('Files dropped:', files);
+    }
+</script>
 </body>
 </html>
