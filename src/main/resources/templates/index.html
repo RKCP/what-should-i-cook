@@ -2,29 +2,7 @@
 <html>
 <head>
   <title>Upload Image</title>
-  <style>
-        .drop-area {
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 50px auto;
-            width: 300px;
-            cursor: pointer;
-            background-color: red; /* Set the background color to red */
-        }
-
-        .drop-area:hover {
-            background-color: #f2f2f2;
-        }
-
-        .message {
-            font-size: 18px;
-            color: #888;
-            margin-top: 20px;
-        }
-    </style>
+  <link rel="stylesheet" type="text/css" href="src/main/resources/static/css/style.css">
 </head>
 <body>
 <div class="drop-area" id="dropArea">
@@ -33,30 +11,10 @@
   </div>
 </div>
 
-<script>
-        var dropArea = document.getElementById('dropArea');
+<form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+  <input type="file" name="imageFile" id="imageFile" style="display: none;">
+</form>
 
-        // Prevent default behavior when files are dragged and dropped onto the drop area
-        dropArea.addEventListener('dragenter', preventDefault, false);
-        dropArea.addEventListener('dragleave', preventDefault, false);
-        dropArea.addEventListener('dragover', preventDefault, false);
-        dropArea.addEventListener('drop', handleDrop, false);
-
-        function preventDefault(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        function handleDrop(e) {
-            preventDefault(e);
-
-            var files = e.dataTransfer.files;
-
-            // Process the dropped files or perform further actions
-            // ...
-
-            console.log('Files dropped:', files);
-        }
-    </script>
+<script src="src/main/resources/static/js/script.js"></script>
 </body>
 </html>

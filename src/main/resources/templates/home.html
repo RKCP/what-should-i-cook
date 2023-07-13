@@ -1,62 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Upload Image</title>
-    <style>
-        .drop-area {
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 50px auto;
-            width: 300px;
-            cursor: pointer;
-            background-color: red; /* Set the background color to red */
-        }
-
-        .drop-area:hover {
-            background-color: #f2f2f2;
-        }
-
-        .message {
-            font-size: 18px;
-            color: #888;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<div class="drop-area" id="dropArea">
+<div class="drop-area" id="dropArea" th:attr="data-url=@{/upload}" th:on-drop="handleDrop(event)">
     <div class="message">
         <strong>Drag and drop</strong> an image here or <strong>click to browse</strong>.
     </div>
 </div>
 
-<script>
-        var dropArea = document.getElementById('dropArea');
-
-        // Prevent default behavior when files are dragged and dropped onto the drop area
-        dropArea.addEventListener('dragenter', preventDefault, false);
-        dropArea.addEventListener('dragleave', preventDefault, false);
-        dropArea.addEventListener('dragover', preventDefault, false);
-        dropArea.addEventListener('drop', handleDrop, false);
-
-        function preventDefault(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        function handleDrop(e) {
-            preventDefault(e);
-
-            var files = e.dataTransfer.files;
-
-            // Process the dropped files or perform further actions
-            // ...
-
-            console.log('Files dropped:', files);
-        }
-    </script>
+<script src="/js/script.js"></script>
 </body>
 </html>

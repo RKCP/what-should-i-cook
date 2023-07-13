@@ -1,44 +1,48 @@
-function preventDefaults(e) {
+var dropArea = document.getElementById('dropArea');
+var fileInput = document.getElementById('imageFile');
+var uploadForm = document.getElementById('uploadForm');
+
+// Prevent default behavior when files are dragged and dropped onto the drop area
+dropArea.addEventListener('dragenter', preventDefault, false);
+dropArea.addEventListener('dragleave', preventDefault, false);
+dropArea.addEventListener('dragover', preventDefault, false);
+dropArea.addEventListener('drop', handleDrop, false);
+
+// Open file dialog when the drop area is clicked
+dropArea.addEventListener('click', function() {
+    fileInput.click();
+});
+
+// Handle file selection
+fileInput.addEventListener('change', handleFileSelection);
+
+function preventDefault(e) {
     e.preventDefault();
     e.stopPropagation();
-}
-
-function highlight(e) {
-    e.currentTarget.classList.add('highlight');
-}
-
-function unhighlight(e) {
-    e.currentTarget.classList.remove('highlight');
 }
 
 function handleDrop(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    preventDefault(e);
 
     var files = e.dataTransfer.files;
-    if (files.length > 0) {
-        var form = new FormData();
-        form.append('file', files[0]);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', e.currentTarget.dataset.url, true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                console.log('File uploaded successfully!');
-            } else {
-                console.error('Failed to upload the file.');
-            }
-        };
-        xhr.send(form);
-    }
+    // Process the dropped files or perform further actions
+    handleFiles(files);
 }
 
-var dropArea = document.getElementById('dropArea');
-dropArea.addEventListener('dragenter', preventDefaults, false);
-dropArea.addEventListener('dragover', preventDefaults, false);
-dropArea.addEventListener('dragleave', preventDefaults, false);
-dropArea.addEventListener('drop', preventDefaults, false);
-dropArea.addEventListener('dragenter', highlight, false);
-dropArea.addEventListener('dragover', highlight, false);
-dropArea.addEventListener('dragleave', unhighlight, false);
-dropArea.addEventListener('drop', unhighlight, false);
+function handleFileSelection(e) {
+    var files = e.target.files;
+
+    // Process the selected files or perform further actions
+    handleFiles(files);
+}
+
+function handleFiles(files) {
+    if (files.length > 0) {
+        var formData = new FormData();
+        formData.append('imageFile', files[0]);
+
+        // Submit the form with the selected file
+        uploadForm.submit();
+    }
+}
