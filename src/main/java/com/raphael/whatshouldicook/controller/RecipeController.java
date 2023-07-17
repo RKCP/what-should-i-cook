@@ -1,6 +1,7 @@
 package com.raphael.whatshouldicook.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +18,14 @@ public class RecipeController {
     }
 
     @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile multipartFile) {
+    public String handleFileUpload(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
 
         // Process the uploaded file
-        // ...
+
+
+        // Add the uploaded file information to the model
+        model.addAttribute("fileName", multipartFile.getOriginalFilename());
         System.out.println("hitting upload method");
-        return "index"; // Redirect back to the index page
+        return "upload-success"; // Redirect back to the index page
     }
 }

@@ -1,5 +1,5 @@
 var dropArea = document.getElementById('dropArea');
-var fileInput = document.getElementById('imageFile');
+var fileInput = document.getElementById('fileInput');
 var uploadForm = document.getElementById('uploadForm');
 
 // Prevent default behavior when files are dragged and dropped onto the drop area
@@ -40,8 +40,7 @@ function handleFileSelection(e) {
 function handleFiles(files) {
     if (files.length > 0) {
         var formData = new FormData();
-        formData.append('imageFile', files[0]);
-        console.log("Inside handleFiles method")
+        formData.append('fileInput', files[0]);
 
         // Submit the form with the selected file
         uploadForm.submit(); // uploadForm refers to a DOM element with the id uploadForm
