@@ -1,5 +1,6 @@
 package com.raphael.whatshouldicook.controller;
 
+import com.raphael.whatshouldicook.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class RecipeController {
+
+    private final RecipeService service;
+
+    public RecipeController(RecipeService service) {
+        this.service = service;
+    }
 
 
     @GetMapping("/")
@@ -21,6 +28,8 @@ public class RecipeController {
     public String handleFileUpload(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
 
         // Process the uploaded file
+        // service method that sends it to s3...
+        service.uploadImage(multipartFile);
 
 
         // Add the uploaded file information to the model
