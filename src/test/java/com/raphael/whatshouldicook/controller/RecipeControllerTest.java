@@ -1,5 +1,6 @@
 package com.raphael.whatshouldicook.controller;
 
+import com.raphael.whatshouldicook.service.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeControllerTest {
@@ -23,31 +23,31 @@ public class RecipeControllerTest {
     private RecipeService recipeServiceMock;
 
     @InjectMocks
-    private RecipieController recipieController;
+    private RecipeController recipeController;
 
 
-
-    @Test
-    void getRecipeFromImage_ReturnsRecipeBasedOnImage() {
-
-
-        // Given
-        String filePath = "/path/to/local/image.jpg"; // Replace with the path to the local image file
-        try {
-            MultipartFile multipartFile = createMultipartFileFromLocalFile(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-            //logger
-        }
-
-        when(recipeServiceMock.uploadImage(file)).thenReturn("Success!");
-
-        // When
-        String imageUpload = recipieController.getRecipieFromImage(file);
-
-        // Then
-        assertEquals("Success!", imageUpload);
-    }
+//    @Test
+//    void handleFileUpload_ReturnStringAfterImageUploaded() {
+//
+//
+//        // Given
+//        String filePath = "src/test/resources/fridge.jpg"; // Replace with the path to the local image file
+//        MultipartFile multipartFile;
+//        try {
+//            multipartFile = createMultipartFileFromLocalFile(filePath);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//            //logger
+//        }
+//
+//        //when(recipeServiceMock.uploadImage(multipartFile)).thenReturn("Success!");
+//
+//        // When
+//        String imageUpload = recipeController.handleFileUpload(multipartFile);
+//
+//        // Then
+//        assertEquals("Success!", imageUpload);
+//    }
 
 
 

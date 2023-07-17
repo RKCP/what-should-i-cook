@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+  <title>Upload Image</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<div class="drop-area" id="dropArea">
+  <div class="message">
+    <strong>Drag and drop</strong> an image here or <strong>click to browse</strong>.
+  </div>
+</div>
+
+<form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+  <input type="file" name="fileInput" id="fileInput" class="hidden-input">
+</form>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
