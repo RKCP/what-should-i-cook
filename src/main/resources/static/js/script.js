@@ -41,8 +41,9 @@ function handleFiles(files) {
     if (files.length > 0) {
         var formData = new FormData();
         formData.append('imageFile', files[0]);
+        console.log("Inside handleFiles method")
 
         // Submit the form with the selected file
-        uploadForm.submit();
+        uploadForm.submit(); // uploadForm refers to a DOM element with the id uploadForm
     }
 }
