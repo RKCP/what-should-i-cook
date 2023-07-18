@@ -2,46 +2,50 @@ package com.raphael.whatshouldicook.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
+
+import java.io.IOException;
 
 @Service
 public class RecipeService {
 
     public String uploadImage(MultipartFile file) {
 
-        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String stringObjKeyName = "*** String object key name ***";
         String fileObjKeyName = "*** File object key name ***";
         String fileName = "*** Path to file to upload ***";
 
+        Region clientRegion = Region.EU_WEST_1;
+        ProfileCredentialsProvider credentialsProvider = ProfileCredentialsProvider.create();
+
+        S3Client s3 = S3Client.builder()
+                .region(clientRegion)
+                .credentialsProvider(credentialsProvider)
+                .build();
+
+        byte[] fileBytes = new byte[0];
+
         try {
-            //This code expects that you have AWS credentials set up per:
-            // https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html
-            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                    .withRegion(clientRegion)
-                    .build();
-
-            // Upload a text string as a new object.
-            s3Client.putObject(bucketName, stringObjKeyName, "Uploaded String Object");
-
-            // Upload a file as a new object with ContentType and title specified.
-            PutObjectRequest request = new PutObjectRequest(bucketName, fileObjKeyName, new File(fileName));
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType("plain/text");
-            metadata.addUserMetadata("title", "someTitle");
-            request.setMetadata(metadata);
-            s3Client.putObject(request);
-        } catch (AmazonServiceException e) {
-            // The call was transmitted successfully, but Amazon S3 couldn't process
-            // it, so it returned an error response.
-            e.printStackTrace();
-        } catch (SdkClientException e) {
-            // Amazon S3 couldn't be contacted for a response, or the client
-            // couldn't parse the response from Amazon S3.
-            e.printStackTrace();
+            fileBytes = file.getBytes();
+        } catch (IOException e) {
+            // logger here
+            throw new RuntimeException(e);
         }
 
-        return "Success!";
+        PutObjectRequest putOb = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(stringObjKeyName)
+                .build();
+
+        PutObjectResponse response = s3.putObject(putOb, RequestBody.fromBytes(fileBytes));
+
+        return response.eTag();
     }
 }
 
