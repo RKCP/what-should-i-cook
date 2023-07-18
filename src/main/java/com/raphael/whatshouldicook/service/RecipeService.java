@@ -21,7 +21,7 @@ public class RecipeService {
         String fileObjKeyName = "*** File object key name ***";
         String fileName = "*** Path to file to upload ***";
 
-        Region clientRegion = Region.EU_WEST_1;
+        Region clientRegion = Region.EU_WEST_2;
         ProfileCredentialsProvider credentialsProvider = ProfileCredentialsProvider.create();
 
         S3Client s3 = S3Client.builder()
