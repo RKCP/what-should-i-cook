@@ -29,7 +29,7 @@ public class RecipeController {
 
         // Process the uploaded file
         // service method that sends it to s3...
-        service.uploadImage(multipartFile);
+        service.uploadImage(multipartFile, multipartFile.getOriginalFilename());
 
 
         // Add the uploaded file information to the model

@@ -15,7 +15,7 @@ import java.io.IOException;
 @Service
 public class RecipeService {
 
-    public String uploadImage(MultipartFile file) {
+    public String uploadImage(MultipartFile file, String fileName) {
 
         S3Client s3 = S3Client.builder()
                 .region(Region.EU_WEST_2)
@@ -33,7 +33,7 @@ public class RecipeService {
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket("whatshouldicookbucket")
-                .key("whatshouldicookbucket/fridge.jpg")
+                .key("whatshouldicookbucket/" + fileName)
                 .build();
 
         PutObjectResponse response = s3.putObject(putObjectRequest, RequestBody.fromBytes(fileBytes));
