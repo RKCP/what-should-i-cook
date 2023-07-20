@@ -2,6 +2,7 @@ package com.raphael.whatshouldicook.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
@@ -16,17 +17,9 @@ public class RecipeService {
 
     public String uploadImage(MultipartFile file) {
 
-        String bucketName = "*** Bucket name ***";
-        String stringObjKeyName = "*** String object key name ***";
-        String fileObjKeyName = "*** File object key name ***";
-        String fileName = "*** Path to file to upload ***";
-
-        Region clientRegion = Region.EU_WEST_2;
-        ProfileCredentialsProvider credentialsProvider = ProfileCredentialsProvider.create();
-
         S3Client s3 = S3Client.builder()
-                .region(clientRegion)
-                .credentialsProvider(credentialsProvider)
+                .region(Region.EU_WEST_2)
+                .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
 
         byte[] fileBytes = new byte[0];
@@ -38,12 +31,12 @@ public class RecipeService {
             throw new RuntimeException(e);
         }
 
-        PutObjectRequest putOb = PutObjectRequest.builder()
-                .bucket(bucketName)
-                .key(stringObjKeyName)
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket("whatshouldicookbucket")
+                .key("whatshouldicookbucket/fridge.jpg")
                 .build();
 
-        PutObjectResponse response = s3.putObject(putOb, RequestBody.fromBytes(fileBytes));
+        PutObjectResponse response = s3.putObject(putObjectRequest, RequestBody.fromBytes(fileBytes));
 
         return response.eTag();
     }
