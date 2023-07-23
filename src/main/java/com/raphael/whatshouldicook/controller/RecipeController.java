@@ -36,5 +36,6 @@ public class RecipeController {
         model.addAttribute("fileName", multipartFile.getOriginalFilename());
         System.out.println("hitting upload method");
         return "upload-success"; // Redirect back to the index page
+        // instead of upload success, need to redirect to the view of the recipe
     }
 }

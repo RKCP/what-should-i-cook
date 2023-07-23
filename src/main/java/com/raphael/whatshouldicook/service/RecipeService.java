@@ -45,4 +45,4 @@ public class RecipeService {
 
 // Perhaps do image processing here instead of sending to s3 and doing as a lambda function in the cloud. Us AWS Rekognition in the Service Layer.\
 
-// For now, for simplicity, just send to s3
+// Next up do local processing with rekognition from aws sdk
