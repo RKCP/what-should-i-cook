@@ -29,7 +29,9 @@ public class RecipeController {
 
         // Process the uploaded file
         // service method that sends it to s3...
-        service.uploadImage(multipartFile, multipartFile.getOriginalFilename());
+        //service.uploadImageAndSendToS3Bucket(multipartFile, multipartFile.getOriginalFilename());
+
+        service.uploadImageAndAnalyzeWithRekognition(multipartFile, multipartFile.getOriginalFilename());
 
 
         // Add the uploaded file information to the model
