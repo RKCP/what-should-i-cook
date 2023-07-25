@@ -7,6 +7,8 @@ import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
+import software.amazon.awssdk.services.rekognition.model.DetectCustomLabelsRequest;
+import software.amazon.awssdk.services.rekognition.model.DetectCustomLabelsResponse;
 import software.amazon.awssdk.services.rekognition.model.DetectLabelsRequest;
 import software.amazon.awssdk.services.rekognition.model.DetectLabelsResponse;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -68,6 +70,14 @@ public class RecipeService {
                 .build();
 
         DetectLabelsResponse detectLabelsResponse =  rekognition.detectLabels(detectLabelsRequest);
+
+        // attempt with custom labels since detectlabels with default amazon training isn't picking up the labels we want.
+        DetectCustomLabelsRequest detectCustomLabelsRequest  = DetectCustomLabelsRequest.builder()
+                .image(builder -> builder.bytes(SdkBytes.fromByteArray(finalFileBytes)))
+                .maxResults(100)
+                .build();
+
+        DetectCustomLabelsResponse detectCustomLabelsResponse = rekognition.detectCustomLabels(detectCustomLabelsRequest);
 
         return "Success";
     }
