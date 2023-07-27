@@ -29,12 +29,15 @@ public class RecipeController {
 
         // Process the uploaded file
         // service method that sends it to s3...
-        service.uploadImage(multipartFile, multipartFile.getOriginalFilename());
+        //service.uploadImageAndSendToS3Bucket(multipartFile, multipartFile.getOriginalFilename());
+
+        service.uploadImageAndAnalyzeWithRekognition(multipartFile, multipartFile.getOriginalFilename());
 
 
         // Add the uploaded file information to the model
         model.addAttribute("fileName", multipartFile.getOriginalFilename());
         System.out.println("hitting upload method");
         return "upload-success"; // Redirect back to the index page
+        // instead of upload success, need to redirect to the view of the recipe
     }
 }
