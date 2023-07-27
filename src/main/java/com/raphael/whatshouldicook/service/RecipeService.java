@@ -1,5 +1,9 @@
 package com.raphael.whatshouldicook.service;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -15,7 +19,10 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RecipeService {
@@ -47,40 +54,29 @@ public class RecipeService {
     }
 
 
-    public String uploadImageAndAnalyzeWithRekognition(MultipartFile file, String fileName) {
 
-        RekognitionClient  rekognition = RekognitionClient.builder()
-                .region(Region.EU_WEST_2)
-                .credentialsProvider(DefaultCredentialsProvider.create())
-                .build();
-
-        byte[] fileBytes = new byte[0];
+    public List<String> getSVGFilesList() {
+        List<String> svgFiles = new ArrayList<>();
 
         try {
-            fileBytes = file.getBytes();
+            // Get the ResourcePatternResolver to resolve resources from a pattern
+            ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
+
+            // Use the resolver to get all resources matching the pattern "classpath:static/svg_files/*.svg"
+            Resource[] resources = resourceResolver.getResources("classpath:svg_files/*.svg");
+
+            // Iterate through the resources and extract their file names
+            for (Resource resource : resources) {
+                svgFiles.add(resource.getFilename());
+            }
         } catch (IOException e) {
-            // logger here
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
-        byte[] finalFileBytes = fileBytes;
-        DetectLabelsRequest detectLabelsRequest = DetectLabelsRequest.builder()
-                .image(builder -> builder.bytes(SdkBytes.fromByteArray(finalFileBytes)))
-                .maxLabels(50)
-                .build();
-
-        DetectLabelsResponse detectLabelsResponse =  rekognition.detectLabels(detectLabelsRequest);
-
-        // attempt with custom labels since detectlabels with default amazon training isn't picking up the labels we want.
-        DetectCustomLabelsRequest detectCustomLabelsRequest  = DetectCustomLabelsRequest.builder()
-                .image(builder -> builder.bytes(SdkBytes.fromByteArray(finalFileBytes)))
-                .maxResults(100)
-                .build();
-
-        DetectCustomLabelsResponse detectCustomLabelsResponse = rekognition.detectCustomLabels(detectCustomLabelsRequest);
-
-        return "Success";
+        return svgFiles;
     }
+
+
 }
 
 
