@@ -63,7 +63,7 @@ public class RecipeService {
             ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
 
             // Use the resolver to get all resources matching the pattern "classpath:static/svg_files/*.svg"
-            Resource[] resources = resourceResolver.getResources("classpath:svg_files/*.svg");
+            Resource[] resources = resourceResolver.getResources("classpath:static/svg_files/*.svg");
 
             // Iterate through the resources and extract their file names
             for (Resource resource : resources) {

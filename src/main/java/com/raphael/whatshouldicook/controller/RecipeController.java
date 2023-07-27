@@ -47,7 +47,7 @@ public class RecipeController {
         List<String> svgFiles = service.getSVGFilesList();
 
         model.addAttribute("svgFiles", svgFiles);
-        return "svggallery";
+        return "index";
     }
 
 }
