@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-  <title>SVG Gallery</title>
+  <title>Upload Image</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<div class="svg-gallery">
-  <div class="svg-row">
-    <!-- Loop through the list of SVG file names and generate SVG items -->
-    <div th:each="svgFile : ${svgFiles}" class="svg-item" onclick="changeOpacity(this)">
-        <!-- Use the Thymeleaf expression to set the 'xlink:href' dynamically -->
-        <image th:src="@{/svg_files/{svgFile}(svgFile=${svgFile})}" width="100" height="100" />
-      </svg>
-    </div>
+<div class="drop-area" id="dropArea">
+  <div class="message">
+    <strong>Drag and drop</strong> an image here or <strong>click to browse</strong>.
   </div>
 </div>
+
+<form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+  <input type="file" name="fileInput" id="fileInput" class="hidden-input">
+</form>
 
 <script src="/js/script.js"></script>
 </body>
