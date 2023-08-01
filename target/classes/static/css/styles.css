@@ -30,7 +30,7 @@
   padding: 20px;
   text-align: center;
   font-family: Arial, sans-serif;
-  margin: 50px auto;
+  margin: 10px auto;
   width: 300px;
   cursor: pointer;
   background-color: red;
@@ -48,3 +48,15 @@
 }
 
 
+/* Center the image on the page */
+.center-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add additional styling to the image if needed */
+.fridge-image {
+    max-width: 100%;
+    max-height: 100%;
+}

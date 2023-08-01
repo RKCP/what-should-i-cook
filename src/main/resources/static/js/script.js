@@ -1,5 +1,4 @@
 var dropArea = document.getElementById('dropArea');
-var fileInput = document.getElementById('fileInput');
 var uploadForm = document.getElementById('uploadForm');
 
 // Prevent default behavior when files are dragged and dropped onto the drop area
@@ -10,11 +9,8 @@ dropArea.addEventListener('drop', handleDrop, false);
 
 // Open file dialog when the drop area is clicked
 dropArea.addEventListener('click', function() {
-    fileInput.click();
+    console.log("CLICKEADSDASD")
 });
-
-// Handle file selection
-fileInput.addEventListener('change', handleFileSelection);
 
 function preventDefault(e) {
     e.preventDefault();
@@ -24,17 +20,10 @@ function preventDefault(e) {
 function handleDrop(e) {
     preventDefault(e);
 
-    var files = e.dataTransfer.files;
+    console.log("ITEM DROPPED ONTO FRIDGE")
 
     // Process the dropped files or perform further actions
-    handleFiles(files);
-}
-
-function handleFileSelection(e) {
-    var files = e.target.files;
-
-    // Process the selected files or perform further actions
-    handleFiles(files);
+    // handleFiles(files);
 }
 
 function handleFiles(files) {
