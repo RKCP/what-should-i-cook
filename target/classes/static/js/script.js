@@ -9,7 +9,7 @@ dropArea.addEventListener('drop', handleDrop, false);
 
 // Open file dialog when the drop area is clicked
 dropArea.addEventListener('click', function() {
-    console.log("CLICKEADSDASD")
+    console.log("FRIDGE CLICKED")
 });
 
 function preventDefault(e) {
@@ -19,8 +19,10 @@ function preventDefault(e) {
 
 function handleDrop(e) {
     preventDefault(e);
+    var dataTransfer = e.dataTransfer;
+    var itemsInFridge = [];
 
-    console.log("ITEM DROPPED ONTO FRIDGE")
+    console.log("ITEM DROPPED ONTO FRIDGE!")
 
     // Process the dropped files or perform further actions
     // handleFiles(files);
