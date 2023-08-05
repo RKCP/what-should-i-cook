@@ -1,6 +1,7 @@
 var dropArea = document.getElementById('dropArea');
 var uploadForm = document.getElementById('uploadForm');
-var currentSVG = "";
+var currentSVGName = "";
+var selectedSVG;
 var itemsInFridge = [];
 
 // Prevent default behavior when files are dragged and dropped onto the drop area
@@ -22,11 +23,12 @@ function preventDefault(e) {
 function handleDrop(e) {
     preventDefault(e);
 
-    console.log(currentSVG + " DROPPED ONTO FRIDGE!")
+    console.log(currentSVGName + " DROPPED ONTO FRIDGE!")
 
     // Get the item file name from the "src" attribute
-    var itemName = currentSVG.split(".").shift();
+    var itemName = currentSVGName.split(".").shift();
     itemsInFridge.push(itemName);
+    selectedSVG.style.opacity = 0.5;
 }
 
 // Add event listener to each SVG item
@@ -35,12 +37,13 @@ svgItems.forEach(function(svgItem) {
     svgItem.addEventListener("mousedown", function(e) {
         // Get the SVG file name when the SVG item is clicked down
         var svgFileName = e.target.src.split("/").pop();
-        currentSVG = svgFileName;
+        currentSVGName = svgFileName;
     });
 });
 
 
-function changeOpacity(svgItem) {
-  svgItem.style.opacity = 0.5; // Set the opacity to the desired value when the SVG item is clicked
+function getSVGElement(svgItem) {
+    selectedSVG = svgItem;
+  //svgItem.style.opacity = 0.5; // Set the opacity to the desired value when the SVG item is clicked
   // You can also add additional logic here if needed
 }
