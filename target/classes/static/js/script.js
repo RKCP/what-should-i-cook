@@ -41,6 +41,15 @@ svgItems.forEach(function(svgItem) {
     });
 });
 
+document.getElementById('shakingImage').addEventListener('click', function() {
+    this.classList.add('shake');
+
+    // Remove the 'shake' class after the animation completes
+    this.addEventListener('animationend', function() {
+        this.classList.remove('shake');
+    });
+});
+
 
 function getSVGElement(svgItem) {
     selectedSVG = svgItem;
