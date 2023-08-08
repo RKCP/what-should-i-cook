@@ -41,13 +41,14 @@ svgItems.forEach(function(svgItem) {
     });
 });
 
-document.getElementById('shakingImage').addEventListener('click', function() {
-    this.classList.add('shake');
+const shakingImage = document.getElementById("shakingImage");
 
-    // Remove the 'shake' class after the animation completes
-    this.addEventListener('animationend', function() {
-        this.classList.remove('shake');
-    });
+shakingImage.addEventListener("dragenter", () => {
+  shakingImage.classList.add("dragged");
+});
+
+shakingImage.addEventListener("dragleave", () => {
+  shakingImage.classList.remove("dragged");
 });
 
 

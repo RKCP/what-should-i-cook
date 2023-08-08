@@ -61,7 +61,7 @@
     max-height: 100%;
 }
 
-#shakingImage:hover {
+#shakingImage.dragged {
   animation: shake 0.5s ease;
 }
 
