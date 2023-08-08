@@ -59,3 +59,17 @@
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+  .svg-item {
+    width: calc(33.33% - 20px); /* Display 3 items per row */
+  }
+}
+
+/* Media query for extra small screens */
+@media screen and (max-width: 480px) {
+  .svg-item {
+    width: calc(50% - 20px); /* Display 2 items per row */
+  }
+}
+

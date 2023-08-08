@@ -3,6 +3,7 @@ var uploadForm = document.getElementById('uploadForm');
 var currentSVGName = "";
 var selectedSVG;
 var itemsInFridge = [];
+const shakingImage = document.getElementById("shakingImage");
 
 // Prevent default behavior when files are dragged and dropped onto the drop area
 dropArea.addEventListener('dragenter', preventDefault, false);
@@ -41,15 +42,22 @@ svgItems.forEach(function(svgItem) {
     });
 });
 
-const shakingImage = document.getElementById("shakingImage");
+//shakingImage.addEventListener("dragenter", () => {
+//  shakingImage.classList.add("dragged");
+//});
+
+//shakingImage.addEventListener("dragleave", () => {
+//  shakingImage.classList.remove("dragged");
+//});
 
 shakingImage.addEventListener("dragenter", () => {
   shakingImage.classList.add("dragged");
+
+  setTimeout(() => {
+    shakingImage.classList.remove("dragged");
+  }, 1000); // Remove "dragged" class after 1 second
 });
 
-shakingImage.addEventListener("dragleave", () => {
-  shakingImage.classList.remove("dragged");
-});
 
 
 function getSVGElement(svgItem) {
