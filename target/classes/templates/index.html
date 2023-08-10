@@ -7,14 +7,11 @@
 </head>
 <body>
 <div class="svg-gallery">
-  <div class="svg-row">
     <!-- Loop through the list of SVG file names and generate SVG items -->
     <div th:each="svgFile : ${svgFiles}" class="svg-item" onmousedown="getSVGElement(this)" draggable="true">
         <!-- Use the Thymeleaf expression to set the 'xlink:href' dynamically -->
         <image th:src="@{/svg_files/{svgFile}(svgFile=${svgFile})}" width="100" height="100" />
-      </svg>
     </div>
-  </div>
 </div>
 <br>
 <div class="center-image" id="dropArea">

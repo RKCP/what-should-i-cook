@@ -42,14 +42,6 @@ svgItems.forEach(function(svgItem) {
     });
 });
 
-//shakingImage.addEventListener("dragenter", () => {
-//  shakingImage.classList.add("dragged");
-//});
-
-//shakingImage.addEventListener("dragleave", () => {
-//  shakingImage.classList.remove("dragged");
-//});
-
 shakingImage.addEventListener("dragenter", () => {
   shakingImage.classList.add("dragged");
 
@@ -63,3 +55,6 @@ shakingImage.addEventListener("dragenter", () => {
 function getSVGElement(svgItem) {
     selectedSVG = svgItem;
 }
+
+
+// Perhaps spend one more day on sorting out the web (svg) layout before moving onto adding API for recipes.

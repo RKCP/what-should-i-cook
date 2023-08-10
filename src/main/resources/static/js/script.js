@@ -55,3 +55,6 @@ shakingImage.addEventListener("dragenter", () => {
 function getSVGElement(svgItem) {
     selectedSVG = svgItem;
 }
+
+
+// Perhaps spend one more day on sorting out the web (svg) layout before moving onto adding API for recipes.
