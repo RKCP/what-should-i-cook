@@ -57,4 +57,4 @@ function getSVGElement(svgItem) {
 }
 
 
-// Perhaps spend one more day on sorting out the web (svg) layout before moving onto adding API for recipes.
+// Add more SVG items later on but for now focus on API aspects for recipes
