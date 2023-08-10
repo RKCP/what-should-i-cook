@@ -26,8 +26,8 @@ public class RecipeController {
 //        return "index";
 //    }
 
-    @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
+    @PostMapping("/findRecipe")
+    public String findRecipeFromIngredients(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
 
         // Process the uploaded file
         // service method that sends it to s3...
