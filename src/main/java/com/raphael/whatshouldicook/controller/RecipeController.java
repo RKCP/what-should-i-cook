@@ -27,6 +27,13 @@ public class RecipeController {
 //    }
 
     @PostMapping("/findRecipe")
+    public String dummyMethod() {
+
+        System.out.println("INSIDE CONTROLLER");
+        return "HelloWorld";
+    }
+
+    @PostMapping("/findRecipes")
     public String findRecipeFromIngredients(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
 
         // Process the uploaded file

@@ -57,4 +57,18 @@ function getSVGElement(svgItem) {
 }
 
 
-// Add more SVG items later on but for now focus on API aspects for recipes
+// AJAX Call to backend
+document.getElementById("findRecipesLink").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevents the default navigation behavior
+
+  // Make an AJAX request to your server endpoint
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/findRecipe", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      // Handle the response from the server if needed
+      console.log("Response from server:", xhr.responseText);
+    }
+  };
+  xhr.send();
+});
