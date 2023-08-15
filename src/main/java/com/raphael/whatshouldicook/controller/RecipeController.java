@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 public class RecipeController {
 
@@ -18,20 +20,25 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/")
-    public String index() {
-        System.out.println("at index now asdasdasdaasd");
-        return "index";
+//    @GetMapping("/")
+//    public String index() {
+//        System.out.println("at index now asdasdasdaasd");
+//        return "index";
+//    }
+
+    @PostMapping("/findRecipe")
+    public String dummyMethod() {
+
+        System.out.println("INSIDE CONTROLLER");
+        return "HelloWorld";
     }
 
-    @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
+    @PostMapping("/findRecipes")
+    public String findRecipeFromIngredients(@RequestParam("fileInput") MultipartFile multipartFile, Model model) {
 
         // Process the uploaded file
         // service method that sends it to s3...
-        //service.uploadImageAndSendToS3Bucket(multipartFile, multipartFile.getOriginalFilename());
-
-        service.uploadImageAndAnalyzeWithRekognition(multipartFile, multipartFile.getOriginalFilename());
+        service.uploadImageAndSendToS3Bucket(multipartFile, multipartFile.getOriginalFilename());
 
 
         // Add the uploaded file information to the model
@@ -40,4 +47,14 @@ public class RecipeController {
         return "upload-success"; // Redirect back to the index page
         // instead of upload success, need to redirect to the view of the recipe
     }
+
+    @GetMapping("/")
+    public String showSVGGallery(Model model) {
+        // Get the list of SVG file names from the "svg_files" directory
+        List<String> svgFiles = service.getSVGFilesList();
+
+        model.addAttribute("svgFiles", svgFiles);
+        return "index";
+    }
+
 }

@@ -1,25 +1,92 @@
-.drop-area {
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    margin: 50px auto;
-    width: 300px;
-    cursor: pointer;
-    background-color: red; /* Set the background color to red */
+.svg-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 20px;
+  max-width: 1200px; /* Set a maximum width to keep the gallery centered and prevent it from stretching too much */
+  margin: 0 auto; /* Center the entire gallery on the page */
 }
 
-.drop-area:hover {
-    background-color: #f2f2f2;
+.svg-item {
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  margin: 10px;
+  box-sizing: border-box;
 }
 
-.message {
-    font-size: 18px;
-    color: #888;
-    margin-top: 20px;
+/* Change the opacity when the user hovers over an SVG item */
+.svg-item:hover {
+  opacity: 0.7;
 }
 
-.hidden-input {
-    display: none;
+.find-recipes-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
+
+.find-recipes-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #a881af;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+}
+
+.find-recipes-link:hover {
+  background-color: #80669d;
+}
+
+
+/* Center the image on the page */
+.center-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add additional styling to the image if needed */
+.fridge-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#shakingImage.dragged {
+  animation: shake 0.5s ease;
+}
+
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .svg-item {
+    width: calc(33.33% - 20px); /* Adjust width for 3 items per row */
+  }
+}
+
+/* Media query for even smaller screens */
+@media (max-width: 480px) {
+  .svg-item {
+    width: calc(50% - 20px); /* Adjust width for 2 items per row */
+  }
+}
+
